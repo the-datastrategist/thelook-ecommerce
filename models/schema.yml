@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: order_metrics_by_day
+    description: A set of metrics by effective date (i.e. asof_date).
+
+    columns:
+      - name: asof_date
+        description: The effective date. Primary key.
+        tests:
+          - unique
+          - not_null
+
+  - name: order_metrics_by_day_product
+    description: This model cleans up customer data
+    columns:
+      - name: asof_date
+        description: The effective date. Based on the order date.
+
+      - name: product_id
+        description: The internal ID for each product.
+
