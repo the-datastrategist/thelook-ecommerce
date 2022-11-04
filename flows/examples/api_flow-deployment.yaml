@@ -1,13 +1,13 @@
 ###
-### A complete description of a Prefect Deployment for flow 'log-flow'
+### A complete description of a Prefect Deployment for flow 'api-flow'
 ###
-name: deploy-1
+name: catfact_tasks_deployment
 description: null
-version: 258327589770175bbc240afce563ae2f
+version: 19b6e15b4036ee95eb1b3e9692da6cb0
 # The work queue that will handle this deployment's runs
-work_queue_name: work_runner
+work_queue_name: worker_1
 tags: []
-parameters: {}
+parameters: {"url": "https://catfact.ninja/fact"}
 schedule: null
 infra_overrides: {}
 infrastructure:
@@ -24,18 +24,17 @@ infrastructure:
 ###
 ### DO NOT EDIT BELOW THIS LINE
 ###
-flow_name: log-flow
+flow_name: api-flow
 manifest_path: null
 storage: null
 path: /Users/gordonsilvera/Repos/thelook-ecommerce
-entrypoint: flows/examples/log_flow.py:log_flow
+entrypoint: flows/examples/catfact_tasks.py:api_flow
 parameter_openapi_schema:
   title: Parameters
   type: object
   properties:
-    name:
-      title: name
-      type: string
+    url:
+      title: url
   required:
-  - name
+  - url
   definitions: null
