@@ -36,5 +36,5 @@ We must first set up our Prefect Cloud account before interacting with it locall
 We use Jupyter Notebooks for ad hoc analysis. Runs locally but in a self-contained Docker image.
 
 ```
-docker-compose -f docker-compose-jupyter.yaml up --build
+docker-compose -f docker-compose.yaml up --build
 ```
