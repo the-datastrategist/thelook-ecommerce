@@ -1,8 +1,8 @@
 # thelook-ecommerce
 
 Building components of a modern data stack using sample e-commerce data from Google BigQuery. Specifically focused on:
-- Transformation: using dbt to build pipelines with testing, CI/CD
-- Orchestration: using Prefect to integrate with dbt and schedule automated processes in Python
+- _Transformation_: using dbt to build pipelines with testing, CI/CD
+- _Orchestration_: using Prefect to integrate with dbt and schedule automated processes in Python
 
 <br>
 
@@ -31,7 +31,7 @@ We must first set up our Prefect Cloud account before interacting with it locall
 
 <br>
 
-### Jupyter Notebooks
+## Jupyter Notebooks
 
 We use Jupyter Notebooks for ad hoc analysis. Runs locally but in a self-contained Docker image.
 
