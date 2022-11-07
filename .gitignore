@@ -9,6 +9,7 @@ dbt_packages/
 
 # iPython notebook checkpoints
 .ipynb_checkpoints/
+*/.ipynb_checkpoints/
 .jupyter/
 .local/
 .ipython/
