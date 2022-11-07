@@ -1,13 +1,17 @@
 # Prefect
 target/
 logs/
-.idea
+.idea/
+.cache/
 
 # dbt
 dbt_packages/
 
 # iPython notebook checkpoints
 .ipynb_checkpoints/
+.jupyter/
+.local/
+.ipython/
 
 # config files (if used)
 config.py
