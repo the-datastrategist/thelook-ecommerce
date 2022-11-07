@@ -1,5 +1,8 @@
 # thelook-ecommerce
-Building components of a modern data stack using sample e-commerce data from Google BigQuery.
+
+Building components of a modern data stack using sample e-commerce data from Google BigQuery. Specifically focused on:
+- Transformation: using dbt to build pipelines with testing, CI/CD
+- Orchestration: using Prefect to integrate with dbt and schedule automated processes in Python
 
 <br>
 
