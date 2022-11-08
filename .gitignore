@@ -17,3 +17,6 @@ dbt_packages/
 # config files (if used)
 config.py
 config.yaml
+
+# JSON keys
+*.json
