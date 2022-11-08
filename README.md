@@ -84,5 +84,14 @@ We must first set up our [Prefect Cloud](https://app.prefect.cloud/) account bef
 3. Start the Orion UI: `prefect orion start`.
     - Note: Prefect points you to the server: http://127.0.0.1:4200/. If you have logged into Prefect Cloud, runs will be visible in your [cloud account](https://app.prefect.cloud/).
 
+
+### Connecting Prefect to DBT
+
+1. Install the `prefect-dbt` package:
+	- `pip install prefect-dbt` to install
+	- `import prefect_dbt` to reference in code
+2. Register prefect_dbt blocks with `prefect block register -m prefect_dbt`.
+
+
 <br>
 

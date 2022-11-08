@@ -1,35 +1,26 @@
-from prefect import task
-from prefect.client import Secret
-from prefect.tasks.dbt import DbtShellTask
+import sys
+import config
+from prefect import task, flow, get_run_logger
+from prefect_dbt.cli.commands import trigger_dbt_cli_command
+from prefect_dbt.cli import DbtCliProfile
 
 
-dbt = DbtShellTask(
-    return_all=True,
-    profile_name="snowflake_slate",
-    environment="dev",
-    # profiles_dir=".",
-    overwrite_profiles=True,
-    log_stdout=True,
-    helper_script="cd dbt",
-    log_stderr=True,
-    dbt_kwargs={
-        "type": "snowflake",
-        "account": Secret("SNOWFLAKE_ACCOUNT").get(),
-        # User/password auth
-        "user": Secret("DBT__SNOWFLAKE_USER").get(),
-        "password": Secret("DBT__SNOWFLAKE_PASS").get(),
-        "role": Secret("DBT__SNOWFLAKE_ROLE").get(),
-        "database": Secret("DBT__SNOWFLAKE_DATABASE").get(),
-        "warehouse": Secret("DBT__SNOWFLAKE__WAREHOUSE").get(),
-        "schema": Secret("DBT__SCHEMA").get(),
-        "threads": 12,
-        "client_session_keep_alive": False,
-    },
-)
+PROFILE_DIRECTORY = config.PROFILE_DIRECTORY
+PROFILE_BLOCK = config.PROFILE_BLOCK
 
 
-@task(trigger=all_finished)
-def output_print(output):
-    logger = prefect.context.get("logger")
-    for o in output:
-        logger.info(o)
+@flow
+def trigger_dbt_cli_command_flow(cmd) -> str:
+    result = trigger_dbt_cli_command(
+        command=cmd,
+        profiles_dir=PROFILE_DIRECTORY,
+    )
+    logger = get_run_logger()
+    logger.info("Command Run: %s", cmd)
+    logger.info("Command Result: %s", result)
+    return result # Returns the last line the in CLI output
+
+
+if __name__ == "__main__":
+    cmd = sys.argv[1]
+    trigger_dbt_cli_command_flow(cmd)
