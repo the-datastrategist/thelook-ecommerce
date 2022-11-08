@@ -1,12 +1,24 @@
+"""
+    dbt_shell_task.py
+
+    Run a DBT CLI command through Prefect.
+
+    Args:
+
+        cmd (string): string containing the command.
+            Use double quotes, e.g. "dbt run".
+
+"""
+
 import sys
-import config
+import dbt_config
 from prefect import task, flow, get_run_logger
 from prefect_dbt.cli.commands import trigger_dbt_cli_command
 from prefect_dbt.cli import DbtCliProfile
 
 
-PROFILE_DIRECTORY = config.PROFILE_DIRECTORY
-PROFILE_BLOCK = config.PROFILE_BLOCK
+PROFILE_DIRECTORY = dbt_config.PROFILE_DIRECTORY
+PROFILE_BLOCK = dbt_config.PROFILE_BLOCK
 
 
 @flow
