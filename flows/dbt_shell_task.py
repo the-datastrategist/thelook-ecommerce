@@ -1,6 +1,7 @@
 from prefect import task
 from prefect.client import Secret
-from prefect.tasks.dbt.dbt import DbtShellTask
+from prefect.tasks.dbt import DbtShellTask
+
 
 dbt = DbtShellTask(
     return_all=True,

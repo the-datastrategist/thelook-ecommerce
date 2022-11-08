@@ -2,6 +2,7 @@ version: '3'
 services:
   notebook:
     build:
+      #context: docker-jupyter-notebook
       context: .
     #image: jupyterlab
     ports:

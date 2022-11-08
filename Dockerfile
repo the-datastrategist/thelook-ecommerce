@@ -1,17 +1,14 @@
-# clone jupyter image
+# jupyter image
 FROM jupyter/scipy-notebook
 
 # copy files
 ADD . /tds
-
-# change workdir to the base directory
 RUN rm -r work
-WORKDIR /tds/
 
 # install requirements
-RUN pip install -r requirements.txt
+RUN pip install -r /tds/requirements.txt
 
-# add python path (for local imports)
+# add persistent python path (for local imports)
 ENV PYTHONPATH "${PYTHONPATH}:/home/jovyan/tds"
 
 # jupyter notebook entry

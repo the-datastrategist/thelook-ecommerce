@@ -1,11 +1,14 @@
 import sys
-from prefect import tasks, flow, get_run_logger
+import prefect
+from prefect import task, flow, get_run_logger
+# from prefect.tasks.dbt.dbt import DbtShellTask
 
 
 @flow
 def dbt_flow(cmd='dbt run'):
-    #return tasks.dbt.DbtShellTask(
-    task = DbtShellTask(
+
+    # Execute specified command
+    task = prefect.tasks.dbt.dbt.DbtShellTask(
         command=cmd,
         profile_name='default',
         environment='Development',

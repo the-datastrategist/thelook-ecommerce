@@ -5,8 +5,8 @@ pip>=21.1.2
 pandas>=1.0.3
 #pandas_datareader>=0.8.1
 #pandas-gbq>=0.13.1
-scipy>=1.9.0
-numpy
+#scipy>=1.9.0
+#numpy
 
 # gcp
 #google-cloud>=0.34.0

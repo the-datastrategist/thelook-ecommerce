@@ -1,13 +1,39 @@
-from prefect import Flow
-from prefect.tasks.dbt import DbtShellTask
+import sys
+import prefect
+from prefect import tasks, flow, get_run_logger
+# from prefect.tasks.dbt.dbt import DbtShellTask
 
-with Flow(name="dbt_flow") as f:
-    task = DbtShellTask(
+
+
+@flow
+def dbt_flow(cmd='dbt run'):
+    #return tasks.dbt.DbtShellTask(
+
+    #task = prefect.tasks.dbt.dbt.DbtShellTask(
+    task = prefect.tasks.DbtShellTask(
+        command=cmd,
         profile_name='default',
         environment='Development',
         dbt_kwargs={'type': 'bigquery'},
         overwrite_profiles=False,
         #profiles_dir=test_path
-    )(command='dbt run')
+    )
+    logger = get_run_logger()
+    logger.info("Command Run: %s!", name)
+    return task
 
-out = f.run()
+if __name__ == "__main__":
+    cmd = sys.argv[1]
+    dbt_flow(cmd)
+
+
+# with Flow(name="dbt_flow") as f:
+#     task = tasks.dbt.DbtShellTask(
+#         profile_name='default',
+#         environment='Development',
+#         dbt_kwargs={'type': 'bigquery'},
+#         overwrite_profiles=False,
+#         #profiles_dir=test_path
+#     )(command='dbt run')
+#
+# out = f.run()

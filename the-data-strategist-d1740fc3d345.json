@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "the-data-strategist",
+  "private_key_id": "d1740fc3d345c510e3e0cdc7b4d53a72445e7ea5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXqN93tiAJk9zy\nq1D7+Telc5X+2v8OpST7M4Ba+D93E2CO2YSsN6oG/51AajBD/ARARHiqSJaRsWOD\nZKNjCvAIuP6EopUMp6BeZ2l+j01PNc5vylATDZeO0BhB2M26HzGnkDOgbhiyqkkQ\novbN5KiTy+M6NVv46krrKEVe4jCJgoIQM5et2y3M7Xd+qJls6I2tFAa/umhB0LLs\nrD4x1gHRl5S44hi/qkedY0gFPA0fs9q8ELfkrH6nuSxBNKdZ0YgiDfPA8RIlMe4B\nBOM1W1b/gVYzFeca05UNq6VBlN8i7YC1+eTRyTKAgbdHKjJkUmUWQmYN1EXmHMF/\nIBIEvfZXAgMBAAECggEAMQJmInDnr/WD4TwQj+qvfDCb1kqTaxMZp+Ko2UOQPLHR\nIDWLgo213JhLdr+LD3Ae0TIeT+hmG176M/pzbQcnzHuqD59ZCwKvHbUXktTjJ0yd\niOcrsmDE4AYndRNdkV4UbTWGnf9XKocrSpYWS20a6FeN4IUOzS8FbpJ8zVbO2/i7\nJw9BHgrnRN0/JXHgG5ms9fo0RLRk0wngqat0Cew1yYMZvkIgzalhuUfSgtE7FIEM\nK4BpVL67yudruP4yiKM6yHMy4nLP9UVkNS5GjBTZu3ilzzPDzdgjtqkhbwf6zs+E\nJ2F3pJsc0mxOqI5XfCE9ltQ06uPy/ZEoJXR+Ypt53QKBgQD7ZLzfcD1BxhEs9/fm\nb+PU645wvL39fbXQ7AUMhwWtWpG7aJwEa1PmjGy1S5nCRgH0Fjt+L5DIT4DjSdHV\n9djiv2W7MeVEwR9JpfaOhr12gKiA0NuycOdoIrq8P369ClHRwNSnBhba2LvkIrys\nq7+AaHyk0svmHiv+TocdKkFzBQKBgQDbnILcR8IDTeay3ewr00vsxC7oX3eQpq7d\nk12FBqhJBaO0oG98Zu6y6FHXFQxFZ/ayHkXU3gH2hCrvkcJX/VDXuCvWc6Kktl/7\no4G0wJJzHBDJWqvxetXHD5cN+nBgbQz5jL07bCGzX6n14g26nqY8Qz2J5gLVNJRE\nMGxWWss6qwKBgCaFJxOtpRVA/jy/ujKLDoP/nBHWOd5vtr5Oi++BePM5H39x5gYf\nU/nNppKZBPRpub7m8TLCoxKua/dnxklcpGEKJtJqMNE6LksgrQjlyH4x9J/YYPGU\nr0CbobVanVbmD+dt/qehHTtnXlL0p6hloLBSUlcHHcsi8GbFLZrgcKrpAoGBAKfP\nGnd0JZ4cwrHevf5nANc0uZs6h8RyeaA6YPWrNqBFvOfiyA3JIZB30UGGhc/rNyi3\n1ShpVBqot55ERLqziDiuNGE0Dw3JheJk+FHD7KQkx/b0X/qvn/bxxL0bpw8nhQiT\nMG3dnIrSCK8oQtFdNS1LPBTJO1TrTngkgEQkMLLtAoGAO31j6fTfDub9UIicDc9Z\nuMnRWkcuiHJYDfPuMNScfBR/sgU3RyoNVC+ak+3jBCtPIYpyPJGLkJPBIXh6W7lj\nOLK3y8cTrNM1/8YGlJCXfHsoEf57cRlXYVLbXpBEm9FZ/+yDfKv9Ngd4fjkuYhuF\nCwSH6ew3p4psB1hxVptR7AY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dbt-user@the-data-strategist.iam.gserviceaccount.com",
+  "client_id": "107084734948219810297",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dbt-user%40the-data-strategist.iam.gserviceaccount.com"
+}
