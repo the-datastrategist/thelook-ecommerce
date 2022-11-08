@@ -3,6 +3,7 @@ target/
 logs/
 .idea/
 .cache/
+.user.yml
 
 # dbt
 dbt_packages/
@@ -13,6 +14,9 @@ dbt_packages/
 .jupyter/
 .local/
 .ipython/
+.DS_Store
+*/__pycache__/
+
 
 # config files (if used)
 config.py
