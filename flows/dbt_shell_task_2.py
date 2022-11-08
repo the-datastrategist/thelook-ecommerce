@@ -14,7 +14,7 @@ def dbt_flow(cmd='dbt run'):
         environment='Development',
         dbt_kwargs={'type': 'bigquery'},
         overwrite_profiles=False,
-        #profiles_dir=test_path
+        profiles_dir='/home/jovyan/.dbt/profiles.yml'
     )
     logger = get_run_logger()
     logger.info("Command Run: %s!", name)

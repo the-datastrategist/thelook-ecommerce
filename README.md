@@ -23,8 +23,8 @@ docker-compose -f docker-compose.yaml up --build
 
 ### Setting up DBT
 
-We will run dbt from our command line. However, you can also use DBT Cloud to run queries from the `/models` directory.
-See more details about Getting Started with DBT Core [here](https://docs.getdbt.com/docs/get-started/getting-started-dbt-core).
+We will run dbt from our command line. However, you can also use [DBT Cloud](https://cloud.getdbt.com/) to run queries from 
+the `/models` directory. See more details about Getting Started with DBT Core [here](https://docs.getdbt.com/docs/get-started/getting-started-dbt-core).
 
 1. Initialize the dbt project with `dbt init {project-name}`. You will add this `project-name` elsewhere.
 2. Update values in the `dbt_project.yml` file as needed. At the least, you'll need to change:
@@ -69,12 +69,12 @@ See more details about Getting Started with DBT Core [here](https://docs.getdbt.
 
 ### Setting up Prefect
 
-We must first set up our Prefect Cloud account before interacting with it locally.
+We must first set up our [Prefect Cloud](https://app.prefect.cloud/) account before interacting with it locally.
 
-1. Sign in or [register](https://docs.prefect.io/ui/cloud-getting-started/#sign-in-or-register) a Prefect Cloud account.
+1. Sign in or [register](https://docs.prefect.io/ui/cloud-getting-started/#sign-in-or-register) a Prefect Cloud account.
 2. Create a profile name if requested.
-3. Create a [workspace](https://app.prefect.cloud/) for your account, or enter an existing workspace.
-4. Create an API key to authorize a local execution environment. If you already have a key, access it [here](https://app.prefect.cloud/my/api-keys).
+3. Create a [workspace](https://app.prefect.cloud/) for your account, or enter an existing workspace.
+4. Create an API key to authorize a local execution environment. If you already have a key, access it [here](https://app.prefect.cloud/my/api-keys).
 
 
 ### Running Prefect
