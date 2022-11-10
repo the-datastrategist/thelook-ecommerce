@@ -24,6 +24,7 @@ dbt-bigquery
 # prefect
 prefect
 prefect-dbt
+gcsfs
 
 # slack
 #slack_sdk

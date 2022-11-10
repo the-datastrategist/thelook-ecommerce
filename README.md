@@ -58,7 +58,7 @@ the `/models` directory. See more details about Getting Started with DBT Core [h
 	```
 
 
-### Running DBT
+### Running DBT from the Cloud UI
 
 ...
 
@@ -87,11 +87,25 @@ We must first set up our [Prefect Cloud](https://app.prefect.cloud/) account bef
 
 ### Connecting Prefect to DBT
 
+In order to run DBT from Prefect, we must install the necessary packages and create
+a connection between the two services. This connection is made through Prefect Blocks.
+
 1. Install the `prefect-dbt` package:
 	- `pip install prefect-dbt` to install
 	- `import prefect_dbt` to reference in code
 2. Register prefect_dbt blocks with `prefect block register -m prefect_dbt`.
+3. Create DBT specific blocks (CliProfile and targetConfigs) ... update here
 
+### Deploying Prefect in the Cloud
+
+You can schedule and run processes from the Orion Cloud UI. We do this through a __Deployment__, which consists of:
+	- _Flow_. ...
+	- _Work Queue_. This is a set (or queue) of Flows to be run in a Deployment. An Agent runs Flows in a given Work Queue. In order to initialize the Work Queue, run:
+		`prefect agent start --work-queue "{work_queue_name}"`
+
+In order to run deployments remotely (i.e. from the Orion Cloud), we must add these __Blocks__ to our deployment:
+	- [Storage](https://docs.prefect.io/tutorials/storage/#using-storage-blocks-with-deployments)
+	- [Infrastructure](https://docs.prefect.io/tutorials/storage/#infrastructure)
 
 <br>
 
