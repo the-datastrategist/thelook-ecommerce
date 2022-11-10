@@ -9,7 +9,6 @@
             Use double quotes, e.g. "dbt run".
 
 """
-
 import sys
 import dbt_config
 from prefect import task, flow, get_run_logger
@@ -17,8 +16,8 @@ from prefect_dbt.cli.commands import trigger_dbt_cli_command
 from prefect_dbt.cli import DbtCliProfile
 
 
-PROFILE_DIRECTORY = dbt_config.PROFILE_DIRECTORY
-PROFILE_BLOCK = dbt_config.PROFILE_BLOCK
+PROFILE_DIRECTORY = '.'
+PROFILE_BLOCK = dbt_config.DBT_CLI_PROFILE_BLOCK
 
 
 @flow
