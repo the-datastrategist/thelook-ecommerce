@@ -1,3 +1,5 @@
+{{ config(materialized="table") }}
+
 with
 
     date_range as (

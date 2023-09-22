@@ -1,3 +1,10 @@
+{{
+  config(
+    materialized = "table",
+    cluster_by = ["asof_date", "user_id"],
+  )
+}}
+
 with
 
     user_first_last_order as (
