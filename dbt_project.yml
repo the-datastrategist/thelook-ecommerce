@@ -43,3 +43,6 @@ models:
 
     intermediate:
       +materialized: table
+    
+    metrics:
+      +materialized: table

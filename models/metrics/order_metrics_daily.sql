@@ -1,8 +1,6 @@
-{{config(materialized = "table")}}
+{{ config(materialized="table") }}
 
-with 
-
-date_range as (select * from {{ ref("stg_order_date_range") }})
+with date_range as (select * from {{ ref("stg_order_date_range") }})
 
 select
     asof_date,
