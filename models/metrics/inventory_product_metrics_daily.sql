@@ -11,13 +11,11 @@ with
                     generate_date_array(
                         (
                             select date_sub(max(date(created_at)), interval 29 day)
-                            from
-                                `bigquery-public-data.thelook_ecommerce.inventory_items`
+                            from {{ ref("stg_inventory_items") }}
                         ),
                         (
                             select max(date(created_at))
-                            from
-                                `bigquery-public-data.thelook_ecommerce.inventory_items`
+                            from {{ ref("stg_inventory_items") }}
                         )
                     ) as asof_dates
             ),

@@ -19,7 +19,7 @@ with
             longitude,
             traffic_source,
             created_at as user_created_at
-        from `bigquery-public-data.thelook_ecommerce.users`
+        from {{ ref("stg_users") }}
     ),
 
     orders as (
@@ -38,7 +38,7 @@ with
             num_of_item as order_items,
             date_diff(shipped_at, created_at, hour) as hours_until_shipped,
             date_diff(returned_at, shipped_at, day) as days_until_returned,
-        from `bigquery-public-data.thelook_ecommerce.orders` o
+        from {{ ref("stg_orders") }} o
         join users u using (user_id)
     ),
 
@@ -55,9 +55,8 @@ with
             retail_price,
             retail_price - sale_price as discount,
             sale_price - cost as profit
-        from `bigquery-public-data.thelook_ecommerce.order_items` oi
-        left join
-            `bigquery-public-data.thelook_ecommerce.products` p on oi.product_id = p.id
+        from {{ ref("stg_order_items") }} oi
+        left join {{ ref("stg_products") }} p on oi.product_id = p.id
     )
 
 select o.*, oi.* except (user_id, order_id), u.* except (user_id, user_created_at)

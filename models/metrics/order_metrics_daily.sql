@@ -53,7 +53,7 @@ select
     approx_count_distinct(order_id) as orders_28d,
     approx_count_distinct(inventory_item_id) as items_28d,
 
-from `bigquery-public-data.thelook_ecommerce.order_items`
+from {{ ref("stg_order_items") }}
 join date_range on date_diff(asof_date, date(created_at), day) between 0 and 29
 group by 1
 order by 1 desc

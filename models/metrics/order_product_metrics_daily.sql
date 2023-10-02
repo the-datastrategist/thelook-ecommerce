@@ -28,7 +28,7 @@ product_metrics_1d AS (
     APPROX_COUNT_DISTINCT(order_id) AS orders_28d,
     APPROX_COUNT_DISTINCT(inventory_item_id) AS items_28d,
 
-  FROM `bigquery-public-data.thelook_ecommerce.order_items`
+  FROM {{ ref("stg_order_items") }}
   JOIN date_range
   ON DATE_DIFF(asof_date, DATE(created_at), DAY) BETWEEN 0 AND 29
   GROUP BY 1,2
@@ -42,5 +42,5 @@ SELECT
   prod.sku,
   metric.*,
 FROM product_metrics_1d metric
-JOIN `bigquery-public-data.thelook_ecommerce.products` prod
+JOIN {{ ref("stg_products") }} prod
 ON metric.product_id = prod.id

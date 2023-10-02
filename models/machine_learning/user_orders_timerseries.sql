@@ -81,7 +81,6 @@ select
 
 from user_dates ud
 inner join
-    --`the-data-strategist.thelook_dbt.orders_extended` oe
     {{ ref("orders_extended") }} oe
     on ud.user_id = oe.user_id
     and ud.asof_date >= oe.order_date
