@@ -4,20 +4,6 @@ Building components of a modern data stack using sample e-commerce data from Goo
 - _Transformation_: using dbt to build pipelines with testing, CI/CD
 - _Orchestration_: using Prefect to integrate with dbt and schedule automated processes in Python
 
-<br>
-
-## Jupyter Notebooks
-
-We use Jupyter Notebooks for ad hoc analysis. Runs locally but in a self-contained Docker image.
-We recommend that you run DBT + Prefect through the Jupyter Lab CLI or through their respective cloud UIs.
-
-
-```
-docker-compose -f docker-compose.yaml up --build
-```
-
-<br>
-
 
 ## dbt
 
@@ -108,4 +94,3 @@ In order to run deployments remotely (i.e. from the Orion Cloud), we must add th
 	- [Infrastructure](https://docs.prefect.io/tutorials/storage/#infrastructure)
 
 <br>
-

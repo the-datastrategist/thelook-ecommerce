@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: order_metrics_by_day
-    description: A set of metrics by effective date (i.e. asof_date).
+  - name: order_metrics_daily
+    description: A set of metrics by asof_date (i.e. the effective date).
 
     columns:
       - name: asof_date
