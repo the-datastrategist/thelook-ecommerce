@@ -13,7 +13,7 @@ with
             user_id,
             min(order_date) as first_order_date,
             max(order_date) as last_order_date
-        from {{ ref("orders_extended") }} -- `the-data-strategist.thelook_dbt.order_items_extended`
+        from {{ ref("fact_orders") }}
         group by 1
     ),
 
@@ -81,7 +81,7 @@ select
 
 from user_dates ud
 inner join
-    {{ ref("orders_extended") }} oe
+    {{ ref("fact_orders") }} oe
     on ud.user_id = oe.user_id
     and ud.asof_date >= oe.order_date
 group by 1, 2, ud.first_order_date
