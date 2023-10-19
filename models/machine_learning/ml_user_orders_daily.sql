@@ -42,6 +42,11 @@ with
 select
     asof_date,
     ud.user_id,
+    max(acquisition_traffic_source) as acquisition_traffic_source,
+    max(age) as age,
+    max(gender) as gender,
+    max(country) as country,
+
 
     ud.first_order_date,
     max(oe.order_date) as last_order_date,
@@ -74,10 +79,6 @@ select
     sum(profit) as profit,
     sum(discount) as discount,
 
-    max(traffic_source) as traffic_source,
-    max(age) as age,
-    max(gender) as gender,
-    max(country) as country,
 
 from user_dates ud
 inner join

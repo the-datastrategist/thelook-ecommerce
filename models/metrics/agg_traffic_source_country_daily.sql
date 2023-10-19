@@ -1,6 +1,6 @@
 {{
     config(
-        materialized="view",
+        materialized="table",
     )
 }}
 
@@ -19,6 +19,8 @@ select
     session_traffic_source,
     country,
 
+    -- High-level metrics
+    -- These can be aggregated across any level
     count(distinct user_id) as users,
     count(distinct order_id) as orders,
     sum(revenue) as revenue,
@@ -36,6 +38,16 @@ select
     sum(categories) as total_categories,
     sum(brands) as total_brands,
 
+    -- First-time vs Repeat metrics
+    count(distinct if(order_date = first_order_date, user_id, null))  as users_first_time,
+    count(distinct if(order_date = first_order_date, order_id, null)) as orders_first_time,
+    sum(if(order_date = first_order_date, revenue, 0))                as revenue_first_time,
+
+    count(distinct if(order_date > first_order_date, user_id, null))  as users_repeat,
+    count(distinct if(order_date > first_order_date, order_id, null)) as orders_repeat,
+    sum(if(order_date > first_order_date, revenue, 0))                as revenue_repeat,
+
+    -- Metrics by Order Status (e.g. returned, completed)
     {% for order_status in order_statuses %}
         count(
             distinct if(lower(order_status) = '{{order_status}}', user_id, null)
