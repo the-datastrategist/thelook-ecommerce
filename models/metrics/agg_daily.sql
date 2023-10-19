@@ -98,6 +98,16 @@ with
             sum(categories) as total_categories,
             sum(brands) as total_brands,
 
+            -- First-time vs Repeat metrics
+            count(distinct if(order_date = first_order_date, user_id, null))  as users_first_time,
+            count(distinct if(order_date = first_order_date, order_id, null)) as orders_first_time,
+            sum(if(order_date = first_order_date, revenue, 0))                as revenue_first_time,
+
+            count(distinct if(order_date > first_order_date, user_id, null))  as users_repeat,
+            count(distinct if(order_date > first_order_date, order_id, null)) as orders_repeat,
+            sum(if(order_date > first_order_date, revenue, 0))                as revenue_repeat,
+
+            -- Metrics by order status
             {% for order_status in order_statuses %}
                 count(
                     distinct if(lower(order_status) = '{{order_status}}', user_id, null)

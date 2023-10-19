@@ -47,12 +47,22 @@ with
             acquisition_traffic_source,
             session_traffic_source,
 
+            -- Aggregate metrics
             count(distinct user_id) as users,
             count(distinct order_id) as orders,
             sum(revenue) as revenue,
             sum(cost) as cost,
             sum(profit) as profit,
             sum(discount) as discount,
+
+            -- First-time vs Repeat metrics
+            count(distinct if(order_date = first_order_date, user_id, null))  as users_first_time,
+            count(distinct if(order_date = first_order_date, order_id, null)) as orders_first_time,
+            sum(if(order_date = first_order_date, revenue, 0))                as revenue_first_time,
+
+            count(distinct if(order_date > first_order_date, user_id, null))  as users_repeat,
+            count(distinct if(order_date > first_order_date, order_id, null)) as orders_repeat,
+            sum(if(order_date > first_order_date, revenue, 0))                as revenue_repeat,
 
             {% for order_status in order_statuses %}
                 count(
