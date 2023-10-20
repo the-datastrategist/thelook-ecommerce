@@ -1,6 +1,7 @@
 {{
     config(
         materialized="table",
+        cluster_by=["order_date", "acquisition_traffic_source", "country"],
     )
 }}
 
@@ -15,8 +16,7 @@
 
 select
     order_date,
-    acquisition_traffic_source,
-    session_traffic_source,
+    coalesce(acquisition_traffic_source, 'Other') as acquisition_traffic_source,
     country,
 
     -- High-level metrics
@@ -67,4 +67,4 @@ select
     {% endfor %}
 
 from {{ ref("fact_orders") }}
-group by 1, 2, 3, 4
+group by 1, 2, 3
