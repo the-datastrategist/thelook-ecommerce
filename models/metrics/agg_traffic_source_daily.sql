@@ -17,32 +17,33 @@
 
 with
 
-    events_daily as (
+    event_source_daily as (
         -- Aggregate session metrics by traffic source
         select
-            date(e.created_at) as session_date,
-            u.traffic_source as acquisition_traffic_source,
-            count(distinct session_id) as sessions,
-            count(distinct coalesce(cast(user_id as string), ip_address)) as visitors,
+            session_date,
+            session_traffic_source,
 
+            -- Aggregate metrics
+            count(distinct session_id)  as sessions,
+            count(distinct visitor_id)  as visitors,
+            sum(sequences)              as total_sequences,
+            sum(session_time_sec)       as total_session_time_sec,
+            sum(time_to_cart_sec)       as total_time_to_cart_sec,
+            sum(time_to_purchase_sec)   as total_time_to_purchase_sec,
+            sum(sequences_to_cart)      as total_sequences_to_cart,
+            sum(sequences_to_purchase)  as total_sequences_to_purchase,
+
+            -- Sessions & visitors by event type
             {% for event_type in event_types %}
-                count(
-                    distinct if(lower(event_type) = '{{event_type}}', session_id, null)
-                ) as sessions_with_{{ event_type }},
-                count(
-                    distinct if(
-                        lower(event_type) = '{{event_type}}',
-                        coalesce(cast(user_id as string), ip_address),
-                        null
-                    )
-                ) as visitors_with_{{ event_type }},
+            count(distinct if(events_with_{{ event_type }} > 0, session_id, null)) as sessions_with_{{ event_type }},
+            count(distinct if(events_with_{{ event_type }} > 0, visitor_id, null)) as visitors_with_{{ event_type }},
             {% endfor %}
-        from {{ ref("stg_events") }} e
-        left join {{ ref("stg_users") }} u on e.user_id = u.id
+
+        from {{ ref("fact_sessions") }}
         group by 1, 2
     ),
 
-    orders_daily as (
+    order_source_daily as (
         select
             order_date,
             acquisition_traffic_source,
@@ -64,6 +65,7 @@ with
             count(distinct if(order_date > first_order_date, order_id, null)) as orders_repeat,
             sum(if(order_date > first_order_date, revenue, 0))                as revenue_repeat,
 
+            -- Metrics by order status
             {% for order_status in order_statuses %}
                 count(
                     distinct if(lower(order_status) = '{{order_status}}', user_id, null)
@@ -86,15 +88,35 @@ with
             sum(brands) as total_brands,
         from {{ ref("fact_orders") }}
         group by 1, 2
+    ),
+
+    source_date_range as (
+        -- Get a unique list of dates and traffic_sources
+        select distinct asof_date, traffic_source
+        from (
+            select distinct
+                session_date as asof_date,
+                session_traffic_source as traffic_source
+            from event_source_daily
+            
+            union distinct
+
+            select distinct
+                order_date as asof_date,
+                acquisition_traffic_source as traffic_source,
+            from order_source_daily
+        )
     )
 
 select
     ed.session_date as asof_date,
-    ed.acquisition_traffic_source,
+    coalesce(acquisition_traffic_source, session_traffic_source) as traffic_source,
     od.* except (order_date, acquisition_traffic_source),
-    ed.* except (session_date, acquisition_traffic_source),
-from events_daily ed
-left join
-    orders_daily od
-    on ed.session_date = od.order_date
-    and ed.acquisition_traffic_source = od.acquisition_traffic_source
+    ed.* except (session_date, session_traffic_source),
+from source_date_range dr 
+left join order_source_daily od
+    on dr.asof_date = od.order_date
+    and dr.traffic_source = od.acquisition_traffic_source
+left join event_source_daily ed
+    on dr.asof_date = ed.session_date
+    and dr.traffic_source = ed.session_traffic_source
