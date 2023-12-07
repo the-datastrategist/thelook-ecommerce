@@ -33,6 +33,13 @@ with
             sum(sequences_to_cart)      as total_sequences_to_cart,
             sum(sequences_to_purchase)  as total_sequences_to_purchase,
 
+            avg(sequences)              as avg_sequences,
+            avg(session_time_sec)       as avg_session_time_sec,
+            avg(time_to_cart_sec)       as avg_time_to_cart_sec,
+            avg(time_to_purchase_sec)   as avg_time_to_purchase_sec,
+            avg(sequences_to_cart)      as avg_sequences_to_cart,
+            avg(sequences_to_purchase)  as avg_sequences_to_purchase,
+
             -- Sessions & visitors by event type
             {% for event_type in event_types %}
             count(distinct if(events_with_{{ event_type }} > 0, session_id, null)) as sessions_with_{{ event_type }},

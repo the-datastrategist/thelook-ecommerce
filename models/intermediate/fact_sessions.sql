@@ -55,5 +55,4 @@ select
     {% endfor %}
 
 from {{ ref("stg_events") }} e
-
 group by 1, 2, 3, 5, 6, 7, 8
