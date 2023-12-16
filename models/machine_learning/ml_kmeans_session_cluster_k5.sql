@@ -17,9 +17,6 @@
     "events_with_purchase"
     ] %}
 
-      
-
-
 with 
 
 session_clusters as (
@@ -44,7 +41,7 @@ session_clusters as (
       events_with_cart,
       events_with_purchase,
 
-      FROM `the-data-strategist.thelook_dbt.fact_sessions`
+      from {{ ref("fact_session") }}
     )
   )
 ),
@@ -97,5 +94,5 @@ select
 --     {% endfor %}
 --     ) as cluster_description
 from session_zscore_segments zs
-join {{ ref("fact_sessions") }} s
+join {{ ref("fact_session") }} s
 using(session_id)

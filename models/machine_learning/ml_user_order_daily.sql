@@ -13,7 +13,7 @@ with
             user_id,
             min(order_date) as first_order_date,
             max(order_date) as last_order_date
-        from {{ ref("fact_orders") }}
+        from {{ ref("fact_order") }}
         group by 1
     ),
 
@@ -79,10 +79,9 @@ select
     sum(profit) as profit,
     sum(discount) as discount,
 
-
 from user_dates ud
 inner join
-    {{ ref("fact_orders") }} oe
+    {{ ref("fact_order") }} oe
     on ud.user_id = oe.user_id
     and ud.asof_date >= oe.order_date
 group by 1, 2, ud.first_order_date

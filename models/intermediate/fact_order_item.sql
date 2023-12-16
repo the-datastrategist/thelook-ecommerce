@@ -19,7 +19,7 @@ with
             longitude,
             traffic_source  as acquisition_traffic_source,
             created_at      as user_created_at
-        from {{ ref("stg_users") }}
+        from {{ ref("stg_user") }}
     ),
 
     user_sessions as (
@@ -28,14 +28,14 @@ with
         -- Deduplicate to a single user/date
         select
             user_id,
-            date(min(created_at)) as session_date,
-            min(session_id)       as session_id,
-            min(created_at)       as session_started_at,
-            max(created_at)       as session_ended_at,
-            max(browser)          as session_browser,
-            max(traffic_source)   as session_traffic_source,
+            date(min(created_at))       as session_date,
+            min(session_id)             as session_id,
+            min(created_at)             as session_started_at,
+            max(created_at)             as session_ended_at,
+            max(browser)                as session_browser,
+            max(session_traffic_source) as session_traffic_source,
             sum(if(event_type = 'purchase', 1, 0)) as purchase_events
-        from {{ ref("stg_events") }}
+        from {{ ref("stg_event") }}
         group by 1
         having purchase_events > 0
     ),
@@ -57,7 +57,7 @@ with
             num_of_item         as order_items,
             date_diff(shipped_at, created_at, hour) as hours_until_shipped,
             date_diff(returned_at, shipped_at, day) as days_until_returned,
-        from {{ ref("stg_orders") }} o
+        from {{ ref("stg_order") }} o
         left join user_sessions us 
             on o.user_id = us.user_id 
             and date(o.created_at) = session_date
@@ -76,8 +76,8 @@ with
             retail_price,
             retail_price - sale_price as discount,
             sale_price - cost as profit
-        from {{ ref("stg_order_items") }}  oi
-        left join {{ ref("stg_products") }} p on oi.product_id = p.id
+        from {{ ref("stg_order_item") }}  oi
+        left join {{ ref("stg_product") }} p on oi.product_id = p.id
     )
 
 select
