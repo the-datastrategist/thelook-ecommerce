@@ -58,7 +58,7 @@ with
                 count(distinct if(lower(session_traffic_source) = '{{traffic_source}}', visitor_id, null)) as visitors_from_{{ traffic_source }},
             {% endfor %}
 
-        from {{ ref("fact_sessions") }}
+        from {{ ref("fact_session") }}
         group by 1
     ),
 
@@ -89,21 +89,14 @@ with
             sum(categories) as total_categories,
             sum(brands) as total_brands,
 
-            -- First-time vs Repeat metrics
-            count(
-                distinct if(order_date = first_order_date, user_id, null)
-            ) as users_first_time,
-            count(
-                distinct if(order_date = first_order_date, order_id, null)
-            ) as orders_first_time,
+            -- First-time metrics
+            approx_count_distinct(if(order_date = first_order_date, user_id, null)) as users_first_time,
+            approx_count_distinct(if(order_date = first_order_date, order_id, null)) as orders_first_time,
             sum(if(order_date = first_order_date, revenue, 0)) as revenue_first_time,
 
-            count(
-                distinct if(order_date > first_order_date, user_id, null)
-            ) as users_repeat,
-            count(
-                distinct if(order_date > first_order_date, order_id, null)
-            ) as orders_repeat,
+            -- Repeat users
+            approx_count_distinct(if(order_date > first_order_date, user_id, null)) as users_repeat,
+            approx_count_distinct(if(order_date > first_order_date, order_id, null)) as orders_repeat,
             sum(if(order_date > first_order_date, revenue, 0)) as revenue_repeat,
 
             -- Metrics by order status
@@ -129,7 +122,7 @@ with
 
             {% endfor %}
 
-        from {{ ref("fact_orders") }}
+        from {{ ref("fact_order") }}
         group by 1
     )
 

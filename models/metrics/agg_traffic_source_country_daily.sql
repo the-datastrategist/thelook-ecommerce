@@ -13,7 +13,6 @@
     "returned",
 ] %}
 
-
 select
     order_date,
     coalesce(acquisition_traffic_source, 'Other') as acquisition_traffic_source,
@@ -66,5 +65,5 @@ select
         ) as profit_{{ order_status }},
     {% endfor %}
 
-from {{ ref("fact_orders") }}
+from {{ ref("fact_order") }}
 group by 1, 2, 3

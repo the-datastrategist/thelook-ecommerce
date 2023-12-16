@@ -14,7 +14,6 @@
     "returned",
 ] %}
 
-
 with
 
     event_source_daily as (
@@ -46,7 +45,7 @@ with
             count(distinct if(events_with_{{ event_type }} > 0, visitor_id, null)) as visitors_with_{{ event_type }},
             {% endfor %}
 
-        from {{ ref("fact_sessions") }}
+        from {{ ref("fact_session") }}
         group by 1, 2
     ),
 
@@ -93,7 +92,7 @@ with
             sum(products) as total_products,
             sum(categories) as total_categories,
             sum(brands) as total_brands,
-        from {{ ref("fact_orders") }}
+        from {{ ref("fact_order") }}
         group by 1, 2
     ),
 

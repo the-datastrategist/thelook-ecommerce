@@ -48,5 +48,5 @@ select
   sum(profit) as profit,
   sum(discount) as discount
 
-from {{ ref("fact_order_items") }}
+from {{ ref("fact_order_item") }}
 group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25

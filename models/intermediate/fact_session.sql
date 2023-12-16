@@ -5,7 +5,6 @@
     )
 }}
 
-
 {% set event_types = [
     "product",
     "department",
@@ -54,5 +53,5 @@ select
         ) as events_with_{{ event_type }},
     {% endfor %}
 
-from {{ ref("stg_events") }} e
+from {{ ref("stg_event") }} e
 group by 1, 2, 3, 5, 6, 7, 8

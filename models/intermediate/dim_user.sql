@@ -25,7 +25,7 @@ user_metrics as (
     avg(products)                 as products_per_order,
     avg(categories)               as categories_per_order,
     avg(brands)                   as brands_per_order,
-  from {{ ref("fact_orders") }}
+  from {{ ref("fact_order") }}
   group by 1
 )
 
@@ -38,6 +38,6 @@ select
     when orders = 1 then 'First-Time'
     when orders > 1 then 'Repeat'
     else 'Never' end as segment_repeat
-from {{ ref("stg_users") }} u
+from {{ ref("stg_user") }} u
 left join user_metrics um 
   on u.id = um.user_id
