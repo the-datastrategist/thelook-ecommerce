@@ -67,7 +67,7 @@ with
         select
             user_id,
             order_id,
-            product_id,
+            oi.product_id,
             sku,
             category,
             brand,
@@ -77,7 +77,7 @@ with
             retail_price - sale_price as discount,
             sale_price - cost as profit
         from {{ ref("stg_order_item") }}  oi
-        left join {{ ref("stg_product") }} p on oi.product_id = p.id
+        left join {{ ref("stg_product") }} p on oi.product_id = p.product_id
     )
 
 select
