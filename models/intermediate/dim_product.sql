@@ -1,8 +1,5 @@
 {{
-  config(
-    materialized = "table",
-    cluster_by = ["product_id", "date"],
-  )
+  config(materialized = "table")
 }}
 
 {% set order_status = ["Shipped", "Complete", "Processing", "Cancelled"] %}
